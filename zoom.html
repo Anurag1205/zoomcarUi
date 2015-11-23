@@ -1,0 +1,223 @@
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Angular js</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheets">
+
+    <!-- Custom Fonts -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    </head>
+<style>
+ul.trackerdisplay li {
+    padding: 10px;
+    border: 1px solid grey;
+    margin: 5px;
+    border-radius: 5px;
+    list-style: none;
+}
+span.price.ng-binding {
+    float: right;
+}
+.col-lg-6.col-md-6.body_border {
+    border: 1px solid black;
+    margin-left: 48px;
+}
+input.ng-pristine.ng-valid {
+    border-radius: 4px;
+    border-shadow: none;
+    width: 30em;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.short_margin {
+  margin-bottom: 20px;
+}
+span.type:before {
+    content: "\f07a";
+    font-family: FontAwesome;
+    padding: 5px;
+    font-size: larger;
+}
+span.phone:before {
+    content: "\f095";
+    font-family: fontawesome;
+    padding: 5px;
+    font-size: larger;
+}
+span.inr:before {
+    content: "\f156";
+    font-family: fontawesome;
+    padding: 5px;
+    font-size: larger;
+}
+span.weight:before {
+    content: "\f159";
+    font-family: fontawesome;
+    padding: 5px;
+    font-size: larger;
+}
+ span.quantity:before {
+   content:"\f055";
+   font-family: fontawesome;
+   padding: 5px;
+   font-size: larger;
+ }
+.box {
+  height:30px;
+  width: 60px;
+
+}
+
+nav.navbar.navbar-default {
+    background-color: #6ABD19;
+    color: #fff;
+}
+nav.navbar.navbar-default a{
+    color: #fff;
+}
+
+.borderdiv {
+    border: 1px solid #000;
+    border-radius: 5px;
+}
+ul.trackerdisplay li:hover {
+  background-color: #6ABD19;
+  color: #fff;
+  border:2px solid #eee;
+}
+ul.trackerdisplay li a:hover {
+
+  color: #fff;
+
+}
+body {
+    background-color: #eee;
+    color: #333;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857;
+}
+img.img-responsive.thumbnail {
+    margin-top: 15px;
+}
+</style>
+
+<body>
+
+<div ng-controller="NameCtrl">
+  <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">ZoooooM</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="index.html">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="about.html"><h5>ticker : {{apiHits}} </h5></a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    <div class="row container">
+      <div class="col-md-6 body_border">
+        <div class="search_icon"> Search: <input placeholder="Search by name, price , weight"ng-model="searchtext"></label></div>
+<ul class="trackerdisplay">
+    <li  ng-repeat ="product in products | filter:searchtext | orderBy:sortField">
+      <div class="name">
+        <span class="product_name">
+          <a href ng-click="getProductDetails(product.name);">{{ product.name }}</a>
+        </span>
+         <span class="price">
+        <i class="fa fa-inr"></i>
+        {{product.price}}
+      </span>
+      </div>
+       </li>
+  </ul>
+  <div class="row">
+    <div class="col-md-8">
+      <h2>Sort By</h2>
+
+    </div>
+    <div class="col-md-2 short_margin">
+      <h3><a href="" ng-click="sortField = 'price' ">Value</a></h3>
+
+
+    </div>
+    <div class="col-md-2">
+      <h3><a href="" ng-click="sortField = 'weight'">Weight</a></h3>
+    </div>
+  </div>
+</div>
+<div class="col-md-6 borderdiv">
+    <div class="row">
+      <div class="col-md-6">
+<div>  <img src="{{Productimage}}" class="img-responsive thumbnail"/> </div>
+<div>
+  <h4><span type="date" ng-model = "Productdate">{{Productdate | date:'medium'}}</span></h4>
+ </div>
+      </div>
+      <div class="col-md-6">
+            <h3 class = "text-center product_title" ng-model="Productname">{{Productname}}</h3>
+            <div class="row">
+              <div class="col-md-6">
+                <h4>  <span class="type" ng-model = "Producthouesehold">{{Producthouesehold}}</span></h4>
+                <h4>  <span class="inr" ng-model = "Productprice">{{Productprice}}</span></h4>
+                <h4>  <span class="weight" ng-model = "Productweight">{{Productweight}}</span></h4>
+              </div>
+              <div class="col-md-6">
+                <h4>  <span class="phone" ng-model = "Productphone">{{Productphone}}</span></h4>
+                <h4>  <span class="quantity" ng-model = "Productquantity">{{Productquantity}}</span></h4>
+                <h4>  <div  class="box" style = "background-color:{{Productcolor}};" ></div> Color</h4>
+              </div>
+            </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+      <div class="map center-block">
+
+      </div>
+      </div>
+      </div>
+    </div>
+
+</div>
+</div>
+<script href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</body>
